@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local Business Leaderboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>Local Business Leaderboard</h1>
+        <p class="subtitle" id="subtitle">Plumbers · Austin, TX</p>
+      </div>
+      <div class="header-meta">
+        <span class="badge">100 businesses</span>
+        <span class="badge">Updated May 2026</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Controls panel -->
+    <section class="controls-panel">
+      <div class="controls-grid">
+        <!-- Weight sliders -->
+        <div class="control-group">
+          <h3>Score Weights <span class="weight-total" id="weightTotal">= 100%</span></h3>
+          <div class="sliders">
+            <div class="slider-row">
+              <label>
+                <span class="dot dot-rep"></span>
+                Reputation
+              </label>
+              <input type="range" id="wRep" min="0" max="100" value="50" step="5" />
+              <span class="slider-val" id="wRepVal">50%</span>
+            </div>
+            <div class="slider-row">
+              <label>
+                <span class="dot dot-search"></span>
+                Search Visibility
+              </label>
+              <input type="range" id="wSearch" min="0" max="100" value="30" step="5" />
+              <span class="slider-val" id="wSearchVal">30%</span>
+            </div>
+            <div class="slider-row">
+              <label>
+                <span class="dot dot-site"></span>
+                Site Quality
+              </label>
+              <input type="range" id="wSite" min="0" max="100" value="20" step="5" />
+              <span class="slider-val" id="wSiteVal">20%</span>
+            </div>
+          </div>
+          <button class="btn-reset" id="resetWeights">Reset to 50 / 30 / 20</button>
+        </div>
+
+        <!-- Filters -->
+        <div class="control-group">
+          <h3>Filters</h3>
+          <div class="filter-rows">
+            <div class="filter-row">
+              <label for="minReviews">Min reviews</label>
+              <input type="number" id="minReviews" value="10" min="0" max="500" />
+            </div>
+            <div class="filter-row">
+              <label for="minRating">Min Google rating</label>
+              <input type="number" id="minRating" value="0" min="0" max="5" step="0.1" />
+            </div>
+            <div class="filter-row">
+              <label for="searchBox">Search business</label>
+              <input type="text" id="searchBox" placeholder="Name…" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="control-group legend-group">
+          <h3>Score Breakdown Key</h3>
+          <div class="legend">
+            <div class="legend-item">
+              <span class="dot dot-rep"></span>
+              <div>
+                <strong>Reputation (R)</strong>
+                <p>Google rating, review count (log-scaled), recency</p>
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="dot dot-search"></span>
+              <div>
+                <strong>Search Visibility (S)</strong>
+                <p>Local pack position, keyword rank</p>
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="dot dot-site"></span>
+              <div>
+                <strong>Site Quality (Q)</strong>
+                <p>PageSpeed, audit score, mobile usability</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats bar -->
+    <section class="stats-bar">
+      <div class="stat">
+        <span class="stat-label">Ranked</span>
+        <span class="stat-value" id="statRanked">—</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Avg score</span>
+        <span class="stat-value" id="statAvg">—</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Top score</span>
+        <span class="stat-value" id="statTop">—</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Disqualified</span>
+        <span class="stat-value" id="statDQ">—</span>
+        <span class="stat-hint">&lt; min reviews</span>
+      </div>
+    </section>
+
+    <!-- Leaderboard table -->
+    <section class="table-section">
+      <div class="table-wrap">
+        <table id="leaderboard">
+          <thead>
+            <tr>
+              <th class="col-rank">Rank</th>
+              <th class="col-name sortable" data-col="name">Business <span class="sort-icon">↕</span></th>
+              <th class="col-score sortable active-sort" data-col="score">Score <span class="sort-icon">↓</span></th>
+              <th class="col-breakdown">Breakdown (R / S / Q)</th>
+              <th class="col-rating sortable" data-col="rating">Rating <span class="sort-icon">↕</span></th>
+              <th class="col-reviews sortable" data-col="reviewCount">Reviews <span class="sort-icon">↕</span></th>
+              <th class="col-pack sortable" data-col="packPos">Pack pos. <span class="sort-icon">↕</span></th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <p class="table-note" id="dqNote"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Scores are calculated estimates based on weighted signals. Weights are adjustable above. Minimum review threshold filters businesses with insufficient data.</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
