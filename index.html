@@ -3,156 +3,214 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Local Business Leaderboard</title>
+  <title>LocalRank — Local Business Leaderboard</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <div class="header-title">
-        <h1>Local Business Leaderboard</h1>
-        <p class="subtitle" id="subtitle">Plumbers · Austin, TX</p>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Austin, TX · Plumbers · May 2026</div>
+      <h1>See How Every Local Business <span>Really Ranks</span></h1>
+      <p>One transparent score across reputation, search visibility, and site quality — built from public data, tunable weights, and no black boxes.</p>
+      <div class="hero-actions">
+        <a href="leaderboard.html" class="btn-primary">
+          View Leaderboard &rarr;
+        </a>
+        <a href="methodology.html" class="btn-secondary">
+          How scoring works
+        </a>
       </div>
-      <div class="header-meta">
-        <span class="badge">100 businesses</span>
-        <span class="badge">Updated May 2026</span>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-val">20</div>
+          <div class="hero-stat-label">Businesses ranked</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">3</div>
+          <div class="hero-stat-label">Score dimensions</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">0–100</div>
+          <div class="hero-stat-label">Score scale</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">Live</div>
+          <div class="hero-stat-label">Adjustable weights</div>
+        </div>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <!-- Controls panel -->
-    <section class="controls-panel">
-      <div class="controls-grid">
-        <!-- Weight sliders -->
-        <div class="control-group">
-          <h3>Score Weights <span class="weight-total" id="weightTotal">= 100%</span></h3>
-          <div class="sliders">
-            <div class="slider-row">
-              <label>
-                <span class="dot dot-rep"></span>
-                Reputation
-              </label>
-              <input type="range" id="wRep" min="0" max="100" value="50" step="5" />
-              <span class="slider-val" id="wRepVal">50%</span>
-            </div>
-            <div class="slider-row">
-              <label>
-                <span class="dot dot-search"></span>
-                Search Visibility
-              </label>
-              <input type="range" id="wSearch" min="0" max="100" value="30" step="5" />
-              <span class="slider-val" id="wSearchVal">30%</span>
-            </div>
-            <div class="slider-row">
-              <label>
-                <span class="dot dot-site"></span>
-                Site Quality
-              </label>
-              <input type="range" id="wSite" min="0" max="100" value="20" step="5" />
-              <span class="slider-val" id="wSiteVal">20%</span>
-            </div>
-          </div>
-          <button class="btn-reset" id="resetWeights">Reset to 50 / 30 / 20</button>
+  <!-- How it works -->
+  <section class="section" style="background: var(--bg);">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">Process</div>
+        <h2>Three signals. One score.</h2>
+        <p>Each business is evaluated across three weighted dimensions, combined into a single 0–100 ranking number.</p>
+      </div>
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Pull business data</h3>
+          <p>We collect Google ratings, review counts and recency, local pack positions, keyword ranks, and site audit scores for every business in the category.</p>
         </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Normalize each signal</h3>
+          <p>Review counts are log-scaled so large chains don't dominate. Ratings use a floor at 3.0. Pack positions map to a 0–100 curve. Every metric lands on the same scale.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Apply weighted formula</h3>
+          <p>Reputation 50% + Search Visibility 30% + Site Quality 20% = final score. Weights are adjustable — tune them live on the leaderboard page.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Filter low-data businesses</h3>
+          <p>Businesses with fewer than 10 reviews are marked "unranked" rather than given a misleading score. The minimum is adjustable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Filters -->
-        <div class="control-group">
-          <h3>Filters</h3>
-          <div class="filter-rows">
-            <div class="filter-row">
-              <label for="minReviews">Min reviews</label>
-              <input type="number" id="minReviews" value="10" min="0" max="500" />
-            </div>
-            <div class="filter-row">
-              <label for="minRating">Min Google rating</label>
-              <input type="number" id="minRating" value="0" min="0" max="5" step="0.1" />
-            </div>
-            <div class="filter-row">
-              <label for="searchBox">Search business</label>
-              <input type="text" id="searchBox" placeholder="Name…" />
-            </div>
+  <!-- Score buckets -->
+  <section class="section" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">Score breakdown</div>
+        <h2>What goes into the number</h2>
+        <p>Each bucket pulls from multiple signals so no single metric can distort the result.</p>
+      </div>
+      <div class="buckets">
+        <div class="bucket-card bucket-rep">
+          <div class="bucket-header">
+            <div class="bucket-icon bucket-icon-rep">⭐</div>
+            <div class="bucket-weight">50%</div>
+          </div>
+          <h3>Reputation</h3>
+          <p>The cleanest signal. What customers look at first, cheapest to pull, and hardest to fake at scale.</p>
+          <div class="bucket-signals">
+            <div class="bucket-signal">Google rating (floor at 3.0)</div>
+            <div class="bucket-signal">Review count (log-scaled)</div>
+            <div class="bucket-signal">Review recency (last 12 months)</div>
           </div>
         </div>
-
-        <!-- Legend -->
-        <div class="control-group legend-group">
-          <h3>Score Breakdown Key</h3>
-          <div class="legend">
-            <div class="legend-item">
-              <span class="dot dot-rep"></span>
-              <div>
-                <strong>Reputation (R)</strong>
-                <p>Google rating, review count (log-scaled), recency</p>
-              </div>
-            </div>
-            <div class="legend-item">
-              <span class="dot dot-search"></span>
-              <div>
-                <strong>Search Visibility (S)</strong>
-                <p>Local pack position, keyword rank</p>
-              </div>
-            </div>
-            <div class="legend-item">
-              <span class="dot dot-site"></span>
-              <div>
-                <strong>Site Quality (Q)</strong>
-                <p>PageSpeed, audit score, mobile usability</p>
-              </div>
-            </div>
+        <div class="bucket-card bucket-search">
+          <div class="bucket-header">
+            <div class="bucket-icon bucket-icon-search">🔍</div>
+            <div class="bucket-weight">30%</div>
+          </div>
+          <h3>Search Visibility</h3>
+          <p>Local pack position drives foot traffic. All businesses measured from the same GPS point for consistent comparison.</p>
+          <div class="bucket-signals">
+            <div class="bucket-signal">Local pack position (1–3 = in pack)</div>
+            <div class="bucket-signal">Average keyword rank (top terms)</div>
+          </div>
+        </div>
+        <div class="bucket-card bucket-site">
+          <div class="bucket-header">
+            <div class="bucket-icon bucket-icon-site">🌐</div>
+            <div class="bucket-weight">20%</div>
+          </div>
+          <h3>Site Quality</h3>
+          <p>Least impact for most local services — a plumber with 500 reviews doesn't live or die by their PageSpeed score. Still counted.</p>
+          <div class="bucket-signals">
+            <div class="bucket-signal">Google PageSpeed score</div>
+            <div class="bucket-signal">Site audit (broken links, tags)</div>
+            <div class="bucket-signal">Mobile usability</div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Stats bar -->
-    <section class="stats-bar">
-      <div class="stat">
-        <span class="stat-label">Ranked</span>
-        <span class="stat-value" id="statRanked">—</span>
+  <!-- Preview leaderboard -->
+  <section class="section preview-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">Top 5 preview</div>
+        <h2>Current leaders — Plumbers, Austin TX</h2>
+        <p>Default weights: 50% Reputation · 30% Search · 20% Site. Adjust them live on the full leaderboard.</p>
       </div>
-      <div class="stat">
-        <span class="stat-label">Avg score</span>
-        <span class="stat-value" id="statAvg">—</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">Top score</span>
-        <span class="stat-value" id="statTop">—</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">Disqualified</span>
-        <span class="stat-value" id="statDQ">—</span>
-        <span class="stat-hint">&lt; min reviews</span>
-      </div>
-    </section>
-
-    <!-- Leaderboard table -->
-    <section class="table-section">
-      <div class="table-wrap">
-        <table id="leaderboard">
+      <div class="preview-table-wrap">
+        <table id="previewTable">
           <thead>
             <tr>
-              <th class="col-rank">Rank</th>
-              <th class="col-name sortable" data-col="name">Business <span class="sort-icon">↕</span></th>
-              <th class="col-score sortable active-sort" data-col="score">Score <span class="sort-icon">↓</span></th>
-              <th class="col-breakdown">Breakdown (R / S / Q)</th>
-              <th class="col-rating sortable" data-col="rating">Rating <span class="sort-icon">↕</span></th>
-              <th class="col-reviews sortable" data-col="reviewCount">Reviews <span class="sort-icon">↕</span></th>
-              <th class="col-pack sortable" data-col="packPos">Pack pos. <span class="sort-icon">↕</span></th>
+              <th>Rank</th>
+              <th>Business</th>
+              <th>Score</th>
+              <th>Score breakdown</th>
+              <th>Rating</th>
+              <th>Pack pos.</th>
             </tr>
           </thead>
-          <tbody id="tbody"></tbody>
+          <tbody id="previewBody"></tbody>
         </table>
       </div>
-      <p class="table-note" id="dqNote"></p>
-    </section>
-  </main>
+      <div class="preview-cta">
+        <a href="leaderboard.html" class="btn-primary" style="display:inline-flex;">
+          View all 20 businesses &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <p>Scores are calculated estimates based on weighted signals. Weights are adjustable above. Minimum review threshold filters businesses with insufficient data.</p>
-  </footer>
+  <!-- CTA -->
+  <section class="cta-banner">
+    <h2>The weights are just a starting point.</h2>
+    <p>Slide them live on the leaderboard to see how rankings shift when you value reputation over search — or vice versa.</p>
+    <a href="leaderboard.html" class="btn-primary" style="display:inline-flex;">Open leaderboard</a>
+  </section>
 
   <script src="data.js"></script>
-  <script src="app.js"></script>
+  <script src="scoring.js"></script>
+  <script src="nav.js"></script>
+  <script>
+    // Populate top-5 preview
+    const top5 = scoreAll(RAW_BUSINESSES, 50, 30, 20)
+      .filter(b => b.reviewCount >= 10)
+      .sort((a,b) => b.score - a.score)
+      .slice(0, 5);
+
+    const tbody = document.getElementById('previewBody');
+    top5.forEach((b, i) => {
+      const rank = i + 1;
+      const repPct    = b.repScore.toFixed(0);
+      const searchPct = b.searchScore.toFixed(0);
+      const sitePct   = b.siteScore.toFixed(0);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><span class="rank-badge rank-${rank <= 3 ? rank : 'other'}">${rank}</span></td>
+        <td>
+          <div class="biz-name">${esc(b.name)}</div>
+          <div class="biz-address">${esc(b.address)}</div>
+        </td>
+        <td><span class="score-pill score-high">${b.score.toFixed(1)}</span></td>
+        <td style="min-width:180px">
+          <div class="bar-mini">
+            <div class="bar-mini-seg" style="width:${repPct * .5}%; background:var(--rep)"></div>
+            <div class="bar-mini-seg" style="width:${searchPct * .3}%; background:var(--search)"></div>
+            <div class="bar-mini-seg" style="width:${sitePct * .2}%; background:var(--site)"></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:4px;font-size:0.73rem;color:var(--muted)">
+            <span style="color:var(--rep)">R ${repPct}</span>
+            <span style="color:var(--search)">S ${searchPct}</span>
+            <span style="color:var(--site)">Q ${sitePct}</span>
+          </div>
+        </td>
+        <td><span class="rating-val">${b.googleRating.toFixed(1)}</span></td>
+        <td><span class="pack-chip pack-${b.packPosition <= 3 ? b.packPosition : b.packPosition <= 10 ? 'low' : 'none'}">${packLabel(b.packPosition)}</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function packLabel(p) {
+      return p === 1 ? '#1 Pack' : p === 2 ? '#2 Pack' : p === 3 ? '#3 Pack' : p <= 10 ? '#' + p : '>#10';
+    }
+  </script>
 </body>
 </html>

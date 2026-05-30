@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaderboard — LocalRank</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="lb-hero">
+    <div class="lb-hero-inner">
+      <div>
+        <h1>Business Leaderboard</h1>
+        <p>Ranked by combined reputation, search visibility, and site quality score</p>
+      </div>
+      <div class="lb-badges">
+        <span class="lb-badge">Plumbers</span>
+        <span class="lb-badge">Austin, TX</span>
+        <span class="lb-badge">May 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="lb-main">
+
+    <!-- Controls -->
+    <div class="controls-grid">
+      <!-- Weights -->
+      <div class="control-group">
+        <h3>Score Weights <span class="weight-total" id="weightTotal">= 100%</span></h3>
+        <div class="sliders">
+          <div class="slider-row">
+            <label><span class="dot dot-rep"></span>Reputation</label>
+            <input type="range" id="wRep" min="0" max="100" value="50" step="5" />
+            <span class="slider-val" id="wRepVal">50%</span>
+          </div>
+          <div class="slider-row">
+            <label><span class="dot dot-search"></span>Search</label>
+            <input type="range" id="wSearch" min="0" max="100" value="30" step="5" />
+            <span class="slider-val" id="wSearchVal">30%</span>
+          </div>
+          <div class="slider-row">
+            <label><span class="dot dot-site"></span>Site Quality</label>
+            <input type="range" id="wSite" min="0" max="100" value="20" step="5" />
+            <span class="slider-val" id="wSiteVal">20%</span>
+          </div>
+        </div>
+        <button class="btn-reset" id="resetWeights">Reset to 50 / 30 / 20</button>
+      </div>
+
+      <!-- Filters -->
+      <div class="control-group">
+        <h3>Filters</h3>
+        <div class="filter-rows">
+          <div class="filter-row">
+            <label for="minReviews">Min reviews</label>
+            <input type="number" id="minReviews" value="10" min="0" max="500" />
+          </div>
+          <div class="filter-row">
+            <label for="minRating">Min Google rating</label>
+            <input type="number" id="minRating" value="0" min="0" max="5" step="0.1" />
+          </div>
+          <div class="filter-row">
+            <label for="searchBox">Search name</label>
+            <input type="text" id="searchBox" placeholder="Filter…" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="control-group">
+        <h3>Breakdown key</h3>
+        <div class="legend">
+          <div class="legend-item">
+            <span class="dot dot-rep"></span>
+            <div><strong>Reputation (R)</strong><p>Rating, review count (log), recency</p></div>
+          </div>
+          <div class="legend-item">
+            <span class="dot dot-search"></span>
+            <div><strong>Search (S)</strong><p>Local pack position, keyword rank</p></div>
+          </div>
+          <div class="legend-item">
+            <span class="dot dot-site"></span>
+            <div><strong>Site Quality (Q)</strong><p>PageSpeed, audit score, mobile</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-label">Ranked</span>
+        <span class="stat-value" id="statRanked">—</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Avg score</span>
+        <span class="stat-value" id="statAvg">—</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Top score</span>
+        <span class="stat-value" id="statTop">—</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Excluded</span>
+        <span class="stat-value" id="statDQ">—</span>
+        <span class="stat-hint">below threshold</span>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-rank">Rank</th>
+            <th class="col-name sortable" data-col="name">Business <span class="sort-icon">↕</span></th>
+            <th class="col-score sortable active-sort" data-col="score">Score <span class="sort-icon">↓</span></th>
+            <th class="col-breakdown">R / S / Q</th>
+            <th class="col-rating sortable" data-col="googleRating">Rating <span class="sort-icon">↕</span></th>
+            <th class="col-reviews sortable" data-col="reviewCount">Reviews <span class="sort-icon">↕</span></th>
+            <th class="col-pack sortable" data-col="packPosition">Pack pos. <span class="sort-icon">↕</span></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <p class="table-note" id="dqNote"></p>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="scoring.js"></script>
+  <script src="app.js"></script>
+  <script src="nav.js"></script>
+</body>
+</html>
