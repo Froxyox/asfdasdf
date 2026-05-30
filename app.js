@@ -63,8 +63,11 @@ function render() {
         <span class="rank-badge ${rankClass(rank)}">${rank}</span>
       </td>
       <td class="col-name">
-        <div class="biz-name">${esc(b.name)}</div>
+        <div class="biz-name">
+          <a href="${esc(b.websiteUrl || '#')}" target="_blank" rel="noopener" class="biz-link">${esc(b.name)}</a>
+        </div>
         <div class="biz-address">${esc(b.address)}</div>
+        ${b.dataSource ? `<div class="biz-source">${esc(b.dataSource)}</div>` : ''}
       </td>
       <td class="col-score">
         <span class="score-pill score-pill-lg ${scoreClass(b.score)}">${b.score.toFixed(1)}</span>

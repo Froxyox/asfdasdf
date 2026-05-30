@@ -118,7 +118,7 @@
             <th class="col-rank">Rank</th>
             <th class="col-name sortable" data-col="name">Business <span class="sort-icon">↕</span></th>
             <th class="col-score sortable active-sort" data-col="score">Score <span class="sort-icon">↓</span></th>
-            <th class="col-breakdown">R / S / Q</th>
+            <th class="col-breakdown">R / S / Q <span class="est-badge" title="Site Quality (Q) scores and pack positions are estimated — PageSpeed API quota exhausted">est. Q</span></th>
             <th class="col-rating sortable" data-col="googleRating">Rating <span class="sort-icon">↕</span></th>
             <th class="col-reviews sortable" data-col="reviewCount">Reviews <span class="sort-icon">↕</span></th>
             <th class="col-pack sortable" data-col="packPosition">Pack pos. <span class="sort-icon">↕</span></th>
@@ -128,6 +128,11 @@
       </table>
     </div>
     <p class="table-note" id="dqNote"></p>
+    <div class="data-note">
+      <strong>Data sources:</strong> Google ratings and review counts are real, sourced from ThreeBestRated, TrustAnalytica, Birdeye, and ServiceAgent (May 2026).
+      Site Quality scores (PageSpeed, audit, mobile) and pack positions are <strong>estimated</strong> — the Google PageSpeed API daily quota was exhausted and sites block headless fetches.
+      Replace with real values by running <code>pagespeedonline.googleapis.com/v5/runPagespeed</code> with a Google Cloud API key.
+    </div>
   </div>
 
   <script src="data.js"></script>
