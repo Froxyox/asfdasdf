@@ -15,7 +15,7 @@
         <rect width="22" height="22" rx="5" fill="#4f87f0"/>
         <path d="M4 16L8.5 8L13 13L16 9.5L19 16H4Z" fill="white" opacity="0.9"/>
       </svg>
-      <span>LocalRank</span>
+      <span>Migon Marketing</span>
     </a>
     <div class="nav-links">
       ${navLink('index.html', 'Home')}
@@ -41,13 +41,13 @@
           <rect width="22" height="22" rx="5" fill="#4f87f0"/>
           <path d="M4 16L8.5 8L13 13L16 9.5L19 16H4Z" fill="white" opacity="0.9"/>
         </svg>
-        <span>LocalRank</span>
+        <span>Migon Marketing</span>
       </a>
-      <p>Transparent, data-driven rankings for local businesses.</p>
+      <p>Data-driven local business rankings and digital marketing intelligence.</p>
     </div>
     <div class="footer-links">
       <div class="footer-col">
-        <h4>Product</h4>
+        <h4>Rankings</h4>
         <a href="leaderboard.html">Leaderboard</a>
         <a href="methodology.html">Methodology</a>
       </div>
@@ -60,15 +60,13 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>Scores are estimates based on weighted public signals. Not affiliated with Google, Yelp, or any rated business.</p>
+    <p>&copy; 2026 Migon Marketing. Scores are calculated from weighted public signals.</p>
   </div>
 </footer>`;
 
-  // Inject nav before first child of body
   document.body.insertAdjacentHTML('afterbegin', navHTML);
   document.body.insertAdjacentHTML('beforeend', footerHTML);
 
-  // Burger toggle
   document.getElementById('navBurger').addEventListener('click', () => {
     document.getElementById('navMobile').classList.toggle('open');
   });
