@@ -28,31 +28,46 @@ const sampleBadge  = document.getElementById('sampleBadge');
 
 const SLIDERS = [wRepEl, wSearchEl, wSiteEl];
 
-/* ── Linked sliders (always sum to 100) ─────────────────────── */
+// Track previous values so we can compute deltas
+const sliderPrev = { wRep: 50, wSearch: 30, wSite: 20 };
+
+/* ── Linked sliders — equal delta distribution ───────────────── */
+// Moving one slider by N splits -N equally across the other two.
+// e.g. Reputation +10 → Search -5, Site -5.
 function onSliderMove(movedEl) {
-  const movedVal = +movedEl.value;
-  const others   = SLIDERS.filter(s => s !== movedEl);
-  const needed   = 100 - movedVal;
+  const newVal = +movedEl.value;
+  const oldVal = sliderPrev[movedEl.id];
+  const delta  = newVal - oldVal;
 
-  const othersSum = others.reduce((s, el) => s + +el.value, 0);
+  if (delta === 0) return;
 
-  if (needed <= 0) {
-    others.forEach(el => { el.value = 0; });
-  } else if (othersSum === 0) {
-    others[0].value = Math.floor(needed / 2);
-    others[1].value = needed - +others[0].value;
-  } else {
-    let allocated = 0;
-    others.forEach((el, i) => {
-      if (i === others.length - 1) {
-        el.value = needed - allocated;
-      } else {
-        const share = Math.round(needed * (+el.value / othersSum));
-        el.value = share;
-        allocated += share;
-      }
-    });
+  const others = SLIDERS.filter(s => s !== movedEl);
+
+  // Each other slider absorbs half the opposite delta
+  let v0 = Math.round(+others[0].value - delta / 2);
+  let v1 = Math.round(+others[1].value - delta / 2);
+
+  // Clamp to [0, 100]
+  v0 = Math.min(100, Math.max(0, v0));
+  v1 = Math.min(100, Math.max(0, v1));
+
+  // If clamping broke the sum, make the unclamped one absorb the leftover
+  const sum = newVal + v0 + v1;
+  if (sum !== 100) {
+    const leftover = 100 - newVal - v0;
+    v1 = Math.min(100, Math.max(0, leftover));
+    // Last resort: pin moved slider if still broken
+    if (newVal + v0 + v1 !== 100) {
+      movedEl.value = 100 - v0 - v1;
+    }
   }
+
+  others[0].value = v0;
+  others[1].value = v1;
+
+  sliderPrev[movedEl.id]   = +movedEl.value;
+  sliderPrev[others[0].id] = v0;
+  sliderPrev[others[1].id] = v1;
 
   updateSliderLabels();
   render();
@@ -194,6 +209,7 @@ SLIDERS.forEach(el => el.addEventListener('input', () => onSliderMove(el)));
 
 document.getElementById('resetWeights').addEventListener('click', () => {
   wRepEl.value = 50; wSearchEl.value = 30; wSiteEl.value = 20;
+  sliderPrev.wRep = 50; sliderPrev.wSearch = 30; sliderPrev.wSite = 20;
   updateSliderLabels();
   render();
 });
@@ -204,6 +220,27 @@ document.querySelectorAll('th.sortable').forEach(th => {
     render();
   });
 });
+
+/* ── Info popover ───────────────────────────────────────────── */
+const infoBtn     = document.getElementById('weightsInfoBtn');
+const popover     = document.getElementById('weightsPopover');
+const popoverClose= document.getElementById('weightsPopoverClose');
+
+if (infoBtn && popover) {
+  infoBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    popover.classList.toggle('open');
+  });
+  popoverClose.addEventListener('click', e => {
+    e.stopPropagation();
+    popover.classList.remove('open');
+  });
+  document.addEventListener('click', e => {
+    if (!popover.contains(e.target) && e.target !== infoBtn) {
+      popover.classList.remove('open');
+    }
+  });
+}
 
 /* ── Init ───────────────────────────────────────────────────── */
 buildDatasetTabs();

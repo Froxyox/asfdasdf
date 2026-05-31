@@ -38,7 +38,24 @@
     <div class="controls-grid">
       <!-- Weights -->
       <div class="control-group">
-        <h3>Score Weights <span class="weight-note">always = 100%</span></h3>
+        <h3>
+          Score Weights
+          <button class="info-btn" id="weightsInfoBtn" aria-label="How weights work" type="button">?</button>
+          <div class="info-popover" id="weightsPopover">
+            <button class="info-popover-close" id="weightsPopoverClose" type="button">&times;</button>
+            <p class="info-popover-heading">What each dimension measures</p>
+            <dl class="info-dl">
+              <dt><span class="dot dot-rep"></span> Reputation</dt>
+              <dd>Google star rating (floor at 3.0), review count (log-scaled so large chains don't dominate), and what % of reviews are recent (last 12 months).</dd>
+              <dt><span class="dot dot-search"></span> Search Visibility</dt>
+              <dd>Whether the business appears in Google's local 3-pack and its average keyword rank for relevant search terms — both measured from the same city-center location for consistency.</dd>
+              <dt><span class="dot dot-site"></span> Site Quality</dt>
+              <dd>Google PageSpeed performance score, a full site audit (broken links, missing tags, duplicate content), and mobile usability.</dd>
+            </dl>
+            <p class="info-popover-heading" style="margin-top:12px">How the sliders work</p>
+            <p class="info-popover-body">The three weights always sum to 100%. Moving one slider redistributes the change equally across the other two — so if you raise Reputation by 10, Search and Site each drop by 5. Use the reset button to return to the default 50 / 30 / 20 split.</p>
+          </div>
+        </h3>
         <div class="sliders">
           <div class="slider-row">
             <label><span class="dot dot-rep"></span>Reputation</label>

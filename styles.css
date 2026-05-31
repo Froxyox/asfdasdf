@@ -608,7 +608,106 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: .02em;
 }
 
-/* ── Weight note ─────────────────────────────────────────────── */
+/* ── Info button + popover ───────────────────────────────────── */
+.info-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--muted);
+  border: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 6px;
+  vertical-align: middle;
+  transition: background .15s, color .15s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.info-btn:hover { background: var(--blue); color: #fff; }
+
+/* The h3 needs relative positioning so the popover anchors to it */
+.control-group h3 { position: relative; }
+
+.info-popover {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 200;
+  width: 300px;
+  background: var(--navy);
+  color: rgba(255,255,255,.85);
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.info-popover.open { display: block; }
+
+.info-popover::before {
+  content: '';
+  position: absolute;
+  top: -6px; left: 16px;
+  width: 12px; height: 12px;
+  background: var(--navy);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+.info-popover-close {
+  position: absolute;
+  top: 10px; right: 12px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,.4);
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 4px;
+  transition: color .15s;
+}
+.info-popover-close:hover { color: #fff; }
+
+.info-popover-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: rgba(255,255,255,.45);
+  margin-bottom: 8px;
+}
+
+.info-dl { display: flex; flex-direction: column; gap: 8px; }
+
+.info-dl dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.83rem;
+}
+
+.info-dl dd {
+  margin: 0 0 0 16px;
+  color: rgba(255,255,255,.65);
+  font-size: 0.8rem;
+}
+
+.info-popover-body {
+  color: rgba(255,255,255,.65);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* ── Weight note (kept for any legacy reference) ─────────────── */
 .weight-note {
   font-size: 0.75rem;
   color: #22c55e;
