@@ -364,6 +364,34 @@ const DATASETS = {
     ],
   },
 
+  /* ── Chicago · Plumbers ────────────────────────────────────── */
+  'chicago-plumbers': {
+    label: 'Plumbers',
+    city: 'Chicago, IL',
+    category: 'Plumbers',
+    sampleData: false,
+    businesses: [
+      {
+        id: 1,
+        name: "Rescue Plumbing",
+        address: "1137 W Webster Ave, Chicago, IL 60614",
+        googleRating: 4.9,
+        reviewCount: 1534,
+        recentReviewPct: 0.55,   // founded 2018, strong ongoing review velocity
+        packPosition: 1,         // multiple GBP listings across Chicago neighborhoods
+        keywordRankAvg: 2.0,     // estimated — dominant brand for Chicago plumbers
+        pageSpeed: 70,           // estimated — modern site, PageSpeed API quota exhausted
+        auditScore: 72,
+        mobileScore: 68,
+        websiteUrl: "https://www.myrescueplumbing.com",
+        dataSource: "4.9★ Google · 1,534 reviews · multiple Chicago GBP listings · est. 2018",
+        notes: "Multi-location GBP strategy across Chicago neighborhoods (Lincoln Ave, North Ave, Paulina St, Milwaukee Ave, Winchester Ave).",
+        estimated: ["pageSpeed", "auditScore", "mobileScore", "packPosition", "keywordRankAvg"],
+      },
+      // Add more Chicago plumbers here
+    ],
+  },
+
 };
 
 // Default dataset key
