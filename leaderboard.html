@@ -12,16 +12,25 @@
   <section class="lb-hero">
     <div class="lb-hero-inner">
       <div>
-        <h1>Business Leaderboard</h1>
-        <p>Ranked by combined reputation, search visibility, and site quality score</p>
+        <h1>
+          <span id="lbTitle">Business Leaderboard</span>
+          <span id="sampleBadge" class="sample-badge" style="display:none">Sample data</span>
+        </h1>
+        <p id="lbSubtitle">Austin, TX</p>
       </div>
       <div class="lb-badges">
-        <span class="lb-badge">Plumbers</span>
-        <span class="lb-badge">Austin, TX</span>
         <span class="lb-badge">May 2026</span>
       </div>
     </div>
   </section>
+
+  <!-- Dataset tabs -->
+  <div class="dataset-bar">
+    <div class="dataset-bar-inner">
+      <span class="dataset-bar-label">Location &amp; category:</span>
+      <div class="ds-tabs" id="datasetTabs"></div>
+    </div>
+  </div>
 
   <div class="lb-main">
 
@@ -29,21 +38,21 @@
     <div class="controls-grid">
       <!-- Weights -->
       <div class="control-group">
-        <h3>Score Weights <span class="weight-total" id="weightTotal">= 100%</span></h3>
+        <h3>Score Weights <span class="weight-note">always = 100%</span></h3>
         <div class="sliders">
           <div class="slider-row">
             <label><span class="dot dot-rep"></span>Reputation</label>
-            <input type="range" id="wRep" min="0" max="100" value="50" step="5" />
+            <input type="range" id="wRep" min="0" max="100" value="50" step="1" />
             <span class="slider-val" id="wRepVal">50%</span>
           </div>
           <div class="slider-row">
             <label><span class="dot dot-search"></span>Search</label>
-            <input type="range" id="wSearch" min="0" max="100" value="30" step="5" />
+            <input type="range" id="wSearch" min="0" max="100" value="30" step="1" />
             <span class="slider-val" id="wSearchVal">30%</span>
           </div>
           <div class="slider-row">
             <label><span class="dot dot-site"></span>Site Quality</label>
-            <input type="range" id="wSite" min="0" max="100" value="20" step="5" />
+            <input type="range" id="wSite" min="0" max="100" value="20" step="1" />
             <span class="slider-val" id="wSiteVal">20%</span>
           </div>
         </div>
@@ -118,7 +127,7 @@
             <th class="col-rank">Rank</th>
             <th class="col-name sortable" data-col="name">Business <span class="sort-icon">↕</span></th>
             <th class="col-score sortable active-sort" data-col="score">Score <span class="sort-icon">↓</span></th>
-            <th class="col-breakdown">R / S / Q <span class="est-badge" title="Site Quality (Q) scores and pack positions are estimated — PageSpeed API quota exhausted">est. Q</span></th>
+            <th class="col-breakdown">R / S / Q <span class="est-badge" title="Site Quality scores are estimated pending live PageSpeed audit">est. Q</span></th>
             <th class="col-rating sortable" data-col="googleRating">Rating <span class="sort-icon">↕</span></th>
             <th class="col-reviews sortable" data-col="reviewCount">Reviews <span class="sort-icon">↕</span></th>
             <th class="col-pack sortable" data-col="packPosition">Pack pos. <span class="sort-icon">↕</span></th>

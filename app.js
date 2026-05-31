@@ -1,15 +1,17 @@
-// Leaderboard page — depends on data.js and scoring.js being loaded first
+// Leaderboard — depends on data.js and scoring.js
 
-let sortCol = 'score';
-let sortAsc  = false;
+/* ── State ─────────────────────────────────────────────────── */
+let sortCol        = 'score';
+let sortAsc        = false;
+let activeDataset  = DEFAULT_DATASET;
 
+/* ── DOM refs ───────────────────────────────────────────────── */
 const wRepEl       = document.getElementById('wRep');
 const wSearchEl    = document.getElementById('wSearch');
 const wSiteEl      = document.getElementById('wSite');
 const wRepValEl    = document.getElementById('wRepVal');
 const wSearchValEl = document.getElementById('wSearchVal');
 const wSiteValEl   = document.getElementById('wSiteVal');
-const weightTotal  = document.getElementById('weightTotal');
 const minReviews   = document.getElementById('minReviews');
 const minRating    = document.getElementById('minRating');
 const searchBox    = document.getElementById('searchBox');
@@ -19,23 +21,85 @@ const statRanked   = document.getElementById('statRanked');
 const statAvg      = document.getElementById('statAvg');
 const statTop      = document.getElementById('statTop');
 const statDQ       = document.getElementById('statDQ');
+const datasetTabs  = document.getElementById('datasetTabs');
+const lbTitle      = document.getElementById('lbTitle');
+const lbSubtitle   = document.getElementById('lbSubtitle');
+const sampleBadge  = document.getElementById('sampleBadge');
 
+const SLIDERS = [wRepEl, wSearchEl, wSiteEl];
+
+/* ── Linked sliders (always sum to 100) ─────────────────────── */
+function onSliderMove(movedEl) {
+  const movedVal = +movedEl.value;
+  const others   = SLIDERS.filter(s => s !== movedEl);
+  const needed   = 100 - movedVal;
+
+  const othersSum = others.reduce((s, el) => s + +el.value, 0);
+
+  if (needed <= 0) {
+    others.forEach(el => { el.value = 0; });
+  } else if (othersSum === 0) {
+    others[0].value = Math.floor(needed / 2);
+    others[1].value = needed - +others[0].value;
+  } else {
+    let allocated = 0;
+    others.forEach((el, i) => {
+      if (i === others.length - 1) {
+        el.value = needed - allocated;
+      } else {
+        const share = Math.round(needed * (+el.value / othersSum));
+        el.value = share;
+        allocated += share;
+      }
+    });
+  }
+
+  updateSliderLabels();
+  render();
+}
+
+function updateSliderLabels() {
+  wRepValEl.textContent    = wRepEl.value    + '%';
+  wSearchValEl.textContent = wSearchEl.value + '%';
+  wSiteValEl.textContent   = wSiteEl.value   + '%';
+}
+
+/* ── Dataset switching ──────────────────────────────────────── */
+function buildDatasetTabs() {
+  datasetTabs.innerHTML = '';
+  Object.entries(DATASETS).forEach(([key, ds]) => {
+    const btn = document.createElement('button');
+    btn.className = 'ds-tab' + (key === activeDataset ? ' active' : '');
+    btn.dataset.key = key;
+    btn.innerHTML = `<span class="ds-city">${ds.city}</span><span class="ds-cat">${ds.label}</span>`;
+    btn.addEventListener('click', () => switchDataset(key));
+    datasetTabs.appendChild(btn);
+  });
+}
+
+function switchDataset(key) {
+  activeDataset = key;
+  document.querySelectorAll('.ds-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.key === key);
+  });
+  const ds = DATASETS[key];
+  lbTitle.textContent    = ds.category;
+  lbSubtitle.textContent = ds.city;
+  if (sampleBadge) sampleBadge.style.display = ds.sampleData ? 'inline-block' : 'none';
+  render();
+}
+
+/* ── Render ─────────────────────────────────────────────────── */
 function render() {
-  const wR = +wRepEl.value;
-  const wS = +wSearchEl.value;
-  const wQ = +wSiteEl.value;
-  const total  = wR + wS + wQ;
-  const minR   = +minReviews.value || 0;
-  const minRat = +minRating.value  || 0;
-  const query  = searchBox.value.trim().toLowerCase();
+  const wR    = +wRepEl.value;
+  const wS    = +wSearchEl.value;
+  const wQ    = +wSiteEl.value;
+  const minR  = +minReviews.value || 0;
+  const minRat = +minRating.value || 0;
+  const query = searchBox.value.trim().toLowerCase();
 
-  wRepValEl.textContent    = wR + '%';
-  wSearchValEl.textContent = wS + '%';
-  wSiteValEl.textContent   = wQ + '%';
-  weightTotal.textContent  = `= ${total}%`;
-  weightTotal.classList.toggle('error', total !== 100);
-
-  const scored = scoreAll(RAW_BUSINESSES, wR, wS, wQ);
+  const businesses = DATASETS[activeDataset].businesses;
+  const scored     = scoreAll(businesses, wR, wS, wQ);
 
   const qualified    = scored.filter(b => b.reviewCount >= minR && b.googleRating >= minRat && (!query || b.name.toLowerCase().includes(query)));
   const disqualified = scored.filter(b => b.reviewCount < minR || b.googleRating < minRat);
@@ -52,7 +116,7 @@ function render() {
   statRanked.textContent = qualified.length;
   statDQ.textContent     = disqualified.length;
   statTop.textContent    = scores.length ? scores[0].toFixed(1) : '—';
-  statAvg.textContent    = scores.length ? (scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(1) : '—';
+  statAvg.textContent    = scores.length ? (scores.reduce((a,b) => a+b, 0) / scores.length).toFixed(1) : '—';
 
   tbody.innerHTML = '';
   qualified.forEach((b, i) => {
@@ -98,15 +162,13 @@ function render() {
   document.querySelectorAll('th.sortable').forEach(th => {
     th.classList.toggle('active-sort', th.dataset.col === sortCol);
     const icon = th.querySelector('.sort-icon');
-    if (th.dataset.col === sortCol) icon.textContent = sortAsc ? '↑' : '↓';
-    else icon.textContent = '↕';
+    icon.textContent = th.dataset.col === sortCol ? (sortAsc ? '↑' : '↓') : '↕';
   });
 }
 
+/* ── Helpers ────────────────────────────────────────────────── */
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
 function rankClass(r) { return r <= 3 ? `rank-${r}` : 'rank-other'; }
-
 function scoreClass(s) { return s >= 75 ? 'score-high' : s >= 55 ? 'score-medium' : 'score-low'; }
 
 function bar(label, value, type) {
@@ -124,13 +186,15 @@ function stars(r) {
 }
 
 function packLabel(p) { return p === 1 ? '#1 Pack' : p === 2 ? '#2 Pack' : p === 3 ? '#3 Pack' : p <= 10 ? `#${p}` : '>#10'; }
-function packClass(p)  { return p <= 3 ? `pack-${p}` : p <= 10 ? 'pack-low' : 'pack-none'; }
+function packClass(p) { return p <= 3 ? `pack-${p}` : p <= 10 ? 'pack-low' : 'pack-none'; }
 
-[wRepEl, wSearchEl, wSiteEl].forEach(el => el.addEventListener('input', render));
+/* ── Event listeners ────────────────────────────────────────── */
+SLIDERS.forEach(el => el.addEventListener('input', () => onSliderMove(el)));
 [minReviews, minRating, searchBox].forEach(el => el.addEventListener('input', render));
 
 document.getElementById('resetWeights').addEventListener('click', () => {
   wRepEl.value = 50; wSearchEl.value = 30; wSiteEl.value = 20;
+  updateSliderLabels();
   render();
 });
 
@@ -141,4 +205,7 @@ document.querySelectorAll('th.sortable').forEach(th => {
   });
 });
 
-render();
+/* ── Init ───────────────────────────────────────────────────── */
+buildDatasetTabs();
+updateSliderLabels();
+switchDataset(DEFAULT_DATASET);
