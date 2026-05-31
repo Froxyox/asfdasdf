@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Your Business Ranked — Migon Marketing</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="submit-hero">
+    <div class="submit-hero-inner">
+      <div class="hero-eyebrow-dark">Free ranking</div>
+      <h1>Get Your Business <span>Ranked</span></h1>
+      <p>Submit your business and Migon Marketing will audit your reputation, search visibility, and site quality — then add you to the leaderboard.</p>
+    </div>
+  </section>
+
+  <!-- Why section + form -->
+  <div class="submit-layout">
+
+    <!-- Left: why get listed -->
+    <aside class="submit-why">
+      <h3>What you get</h3>
+      <ul class="why-list">
+        <li>
+          <span class="why-icon">📊</span>
+          <div>
+            <strong>A scored audit</strong>
+            <p>Reputation, search visibility, and site quality scored 0–100 with a breakdown of what's driving your number.</p>
+          </div>
+        </li>
+        <li>
+          <span class="why-icon">📍</span>
+          <div>
+            <strong>Leaderboard placement</strong>
+            <p>Your business appears alongside competitors so you see exactly where you stand and by how much.</p>
+          </div>
+        </li>
+        <li>
+          <span class="why-icon">🔍</span>
+          <div>
+            <strong>Gap identification</strong>
+            <p>We flag which sub-score is dragging your ranking down — whether it's reviews, local pack position, or your site.</p>
+          </div>
+        </li>
+        <li>
+          <span class="why-icon">🔄</span>
+          <div>
+            <strong>Updated on refresh</strong>
+            <p>When we re-pull the leaderboard your updated scores are reflected automatically.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="why-note">
+        <strong>No cost.</strong> This leaderboard is a Migon Marketing research tool. Submission is free and does not create any obligation.
+      </div>
+    </aside>
+
+    <!-- Right: form -->
+    <main class="submit-form-wrap">
+      <!--
+        To wire this up:
+        1. Sign up at formspree.io (free)
+        2. Create a new form and copy the endpoint ID
+        3. Replace YOUR_FORM_ID below with your actual ID
+           e.g. action="https://formspree.io/f/abcdefgh"
+      -->
+      <form
+        id="submitForm"
+        class="submit-form"
+        action="https://formspree.io/f/YOUR_FORM_ID"
+        method="POST"
+      >
+        <input type="hidden" name="_subject" value="New Leaderboard Submission — Migon Marketing" />
+        <input type="text" name="_gotcha" style="display:none" />
+
+        <div class="form-section-label">About the business</div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="bizName">Business name <span class="req">*</span></label>
+            <input type="text" id="bizName" name="businessName" required placeholder="e.g. Radiant Plumbing" />
+          </div>
+        </div>
+
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label for="bizCategory">Category <span class="req">*</span></label>
+            <select id="bizCategory" name="category" required>
+              <option value="" disabled selected>Select a category</option>
+              <option>Plumbers</option>
+              <option>HVAC &amp; AC Repair</option>
+              <option>Electricians</option>
+              <option>Roofers</option>
+              <option>Landscaping</option>
+              <option>Pest Control</option>
+              <option>House Cleaning</option>
+              <option>General Contractors</option>
+              <option>Dentists</option>
+              <option>Restaurants</option>
+              <option>Auto Repair</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="bizCity">City / Service area <span class="req">*</span></label>
+            <input type="text" id="bizCity" name="city" required placeholder="e.g. Austin, TX" />
+          </div>
+        </div>
+
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label for="bizAddress">Street address</label>
+            <input type="text" id="bizAddress" name="address" placeholder="123 Main St, Austin, TX 78701" />
+          </div>
+          <div class="form-field">
+            <label for="bizWebsite">Website URL</label>
+            <input type="url" id="bizWebsite" name="website" placeholder="https://yourbusiness.com" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="bizGBP">Google Business Profile URL</label>
+            <input type="url" id="bizGBP" name="googleBusinessProfile" placeholder="https://maps.google.com/…" />
+            <span class="field-hint">Paste the link from your Google Maps listing — speeds up data pull</span>
+          </div>
+        </div>
+
+        <div class="form-section-label" style="margin-top: 24px;">Your contact info</div>
+
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label for="contactName">Your name <span class="req">*</span></label>
+            <input type="text" id="contactName" name="contactName" required placeholder="Jane Smith" />
+          </div>
+          <div class="form-field">
+            <label for="contactRole">Your role</label>
+            <input type="text" id="contactRole" name="role" placeholder="Owner, Manager, Marketing…" />
+          </div>
+        </div>
+
+        <div class="form-row form-row-2">
+          <div class="form-field">
+            <label for="contactEmail">Email <span class="req">*</span></label>
+            <input type="email" id="contactEmail" name="email" required placeholder="jane@yourbusiness.com" />
+          </div>
+          <div class="form-field">
+            <label for="contactPhone">Phone</label>
+            <input type="tel" id="contactPhone" name="phone" placeholder="(512) 555-0100" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="message">Anything else we should know?</label>
+            <textarea id="message" name="message" rows="3" placeholder="Multiple locations, recent rebrand, specific keywords you want tracked…"></textarea>
+          </div>
+        </div>
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn-submit">Submit for ranking &rarr;</button>
+          <p class="form-legal">By submitting you agree to Migon Marketing contacting you about your listing. No spam, no obligation.</p>
+        </div>
+
+        <!-- Success / error messages shown by JS -->
+        <div id="formSuccess" class="form-message form-message-success" style="display:none">
+          <strong>Submitted!</strong> We've received your request and will be in touch within 2 business days.
+        </div>
+        <div id="formError" class="form-message form-message-error" style="display:none">
+          <strong>Something went wrong.</strong> Please try again or email us directly.
+        </div>
+      </form>
+    </main>
+
+  </div>
+
+  <script src="nav.js"></script>
+  <script>
+    const form = document.getElementById('submitForm');
+    const successMsg = document.getElementById('formSuccess');
+    const errorMsg   = document.getElementById('formError');
+
+    // Only intercept if Formspree ID has been set
+    if (form.action.includes('YOUR_FORM_ID')) {
+      // Dev mode: show success immediately so the UI is testable
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        successMsg.style.display = 'block';
+        form.style.opacity = '0.4';
+        form.style.pointerEvents = 'none';
+      });
+    } else {
+      // Production: AJAX submit to Formspree
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const btn = form.querySelector('.btn-submit');
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' },
+          });
+          if (res.ok) {
+            successMsg.style.display = 'block';
+            form.style.opacity = '0.4';
+            form.style.pointerEvents = 'none';
+          } else {
+            throw new Error('non-ok');
+          }
+        } catch {
+          errorMsg.style.display = 'block';
+          btn.textContent = 'Submit for ranking →';
+          btn.disabled = false;
+        }
+      });
+    }
+  </script>
+</body>
+</html>

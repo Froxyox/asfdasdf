@@ -22,13 +22,14 @@
       ${navLink('leaderboard.html', 'Leaderboard')}
       ${navLink('methodology.html', 'Methodology')}
     </div>
-    <a href="leaderboard.html" class="nav-cta">View Rankings</a>
+    <a href="submit.html" class="nav-cta">Get Listed</a>
     <button class="nav-burger" id="navBurger" aria-label="Menu">&#9776;</button>
   </div>
   <div class="nav-mobile" id="navMobile">
     ${navLink('index.html', 'Home')}
     ${navLink('leaderboard.html', 'Leaderboard')}
     ${navLink('methodology.html', 'Methodology')}
+    ${navLink('submit.html', 'Get Listed')}
   </div>
 </nav>`;
 
@@ -50,6 +51,7 @@
         <h4>Rankings</h4>
         <a href="leaderboard.html">Leaderboard</a>
         <a href="methodology.html">Methodology</a>
+        <a href="submit.html">Get Listed</a>
       </div>
       <div class="footer-col">
         <h4>Data sources</h4>
