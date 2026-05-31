@@ -28,46 +28,19 @@ const sampleBadge  = document.getElementById('sampleBadge');
 
 const SLIDERS = [wRepEl, wSearchEl, wSiteEl];
 
-// Track previous values so we can compute deltas
-const sliderPrev = { wRep: 50, wSearch: 30, wSite: 20 };
-
-/* ── Linked sliders — equal delta distribution ───────────────── */
-// Moving one slider by N splits -N equally across the other two.
-// e.g. Reputation +10 → Search -5, Site -5.
+/* ── Linked sliders — always equal split ────────────────────── */
+// Whatever value the moved slider is set to, the remaining (100 - val)
+// is divided equally between the other two.
+// e.g. Search → 80: remaining = 20 → Reputation = 10, Site = 10.
 function onSliderMove(movedEl) {
-  const newVal = +movedEl.value;
-  const oldVal = sliderPrev[movedEl.id];
-  const delta  = newVal - oldVal;
+  const val       = +movedEl.value;
+  const others    = SLIDERS.filter(s => s !== movedEl);
+  const remaining = 100 - val;
 
-  if (delta === 0) return;
-
-  const others = SLIDERS.filter(s => s !== movedEl);
-
-  // Each other slider absorbs half the opposite delta
-  let v0 = Math.round(+others[0].value - delta / 2);
-  let v1 = Math.round(+others[1].value - delta / 2);
-
-  // Clamp to [0, 100]
-  v0 = Math.min(100, Math.max(0, v0));
-  v1 = Math.min(100, Math.max(0, v1));
-
-  // If clamping broke the sum, make the unclamped one absorb the leftover
-  const sum = newVal + v0 + v1;
-  if (sum !== 100) {
-    const leftover = 100 - newVal - v0;
-    v1 = Math.min(100, Math.max(0, leftover));
-    // Last resort: pin moved slider if still broken
-    if (newVal + v0 + v1 !== 100) {
-      movedEl.value = 100 - v0 - v1;
-    }
-  }
-
-  others[0].value = v0;
-  others[1].value = v1;
-
-  sliderPrev[movedEl.id]   = +movedEl.value;
-  sliderPrev[others[0].id] = v0;
-  sliderPrev[others[1].id] = v1;
+  // Split remaining equally; give any odd remainder to the first other
+  const half = Math.floor(remaining / 2);
+  others[0].value = half + (remaining % 2);
+  others[1].value = half;
 
   updateSliderLabels();
   render();
@@ -209,7 +182,6 @@ SLIDERS.forEach(el => el.addEventListener('input', () => onSliderMove(el)));
 
 document.getElementById('resetWeights').addEventListener('click', () => {
   wRepEl.value = 50; wSearchEl.value = 30; wSiteEl.value = 20;
-  sliderPrev.wRep = 50; sliderPrev.wSearch = 30; sliderPrev.wSite = 20;
   updateSliderLabels();
   render();
 });
@@ -221,12 +193,25 @@ document.querySelectorAll('th.sortable').forEach(th => {
   });
 });
 
-/* ── Info popover ───────────────────────────────────────────── */
-const infoBtn     = document.getElementById('weightsInfoBtn');
-const popover     = document.getElementById('weightsPopover');
-const popoverClose= document.getElementById('weightsPopoverClose');
+/* ── Info popover — hover (touch falls back to click) ───────── */
+const infoBtn      = document.getElementById('weightsInfoBtn');
+const popover      = document.getElementById('weightsPopover');
+const popoverClose = document.getElementById('weightsPopoverClose');
 
 if (infoBtn && popover) {
+  let hideTimer;
+
+  const show = () => { clearTimeout(hideTimer); popover.classList.add('open'); };
+  const hide = () => { hideTimer = setTimeout(() => popover.classList.remove('open'), 120); };
+
+  // Hover — desktop
+  infoBtn.addEventListener('mouseenter', show);
+  infoBtn.addEventListener('mouseleave', hide);
+  // Keep popover open when cursor moves into it
+  popover.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+  popover.addEventListener('mouseleave', hide);
+
+  // Touch fallback — tap toggles
   infoBtn.addEventListener('click', e => {
     e.stopPropagation();
     popover.classList.toggle('open');
