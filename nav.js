@@ -59,6 +59,12 @@
         <a href="#">PageSpeed Insights</a>
         <a href="#">Ubersuggest</a>
       </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="https://migonmarketing.com" target="_blank" rel="noopener">migonmarketing.com</a>
+        <a href="https://migonmarketing.com" target="_blank" rel="noopener">Schedule a free strategy call</a>
+        <a href="https://migonmarketing.com" target="_blank" rel="noopener">Get a free site audit</a>
+      </div>
     </div>
   </div>
   <div class="footer-bottom">
