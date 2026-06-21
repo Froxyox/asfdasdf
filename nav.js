@@ -61,9 +61,10 @@
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
+        <a href="mailto:skylar@migonmarketing.com">skylar@migonmarketing.com</a>
+        <a href="tel:+13058124212">(305) 812-4212</a>
         <a href="https://migonmarketing.com" target="_blank" rel="noopener">migonmarketing.com</a>
         <a href="https://migonmarketing.com" target="_blank" rel="noopener">Schedule a free strategy call</a>
-        <a href="https://migonmarketing.com" target="_blank" rel="noopener">Get a free site audit</a>
       </div>
     </div>
   </div>
