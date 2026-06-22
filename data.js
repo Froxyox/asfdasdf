@@ -19,6 +19,7 @@ const DATASETS = {
         pageSpeed: 72, auditScore: 75, mobileScore: 68,
         websiteUrl: "https://radiantplumbing.com",
         dataSource: "ThreeBestRated #1 · Birdeye 12,426 reviews",
+        dataSourceUrl: "https://threebestrated.com",
       },
       {
         id: 2,
@@ -29,6 +30,7 @@ const DATASETS = {
         pageSpeed: 52, auditScore: 58, mobileScore: 50,
         websiteUrl: "https://www.rooterman.com/greater-austin/",
         dataSource: "TrustAnalytica · Birdeye 1,202 cross-platform",
+        dataSourceUrl: "https://trustanalytica.com",
       },
       {
         id: 3,
@@ -39,6 +41,7 @@ const DATASETS = {
         pageSpeed: 68, auditScore: 72, mobileScore: 65,
         websiteUrl: "https://reliantplumbing.com",
         dataSource: "ThreeBestRated #3 · TrustAnalytica 784 reviews",
+        dataSourceUrl: "https://threebestrated.com",
       },
       {
         id: 4,
@@ -49,6 +52,7 @@ const DATASETS = {
         pageSpeed: 71, auditScore: 74, mobileScore: 70,
         websiteUrl: "https://www.callproven.com",
         dataSource: "ServiceAgent · Birdeye 2,798 Google reviews",
+        dataSourceUrl: "https://www.serviceagent.com",
       },
 
       {
@@ -60,6 +64,7 @@ const DATASETS = {
         pageSpeed: 65, auditScore: 68, mobileScore: 60,
         websiteUrl: "https://www.abchomeandcommercial.com/austin/plumbing",
         dataSource: "ConsumerAffairs · Birdeye 1,128 reviews · est. 1949",
+        dataSourceUrl: "https://www.consumeraffairs.com",
       },
       {
         id: 6,
@@ -70,6 +75,7 @@ const DATASETS = {
         pageSpeed: 74, auditScore: 76, mobileScore: 72,
         websiteUrl: "https://www.danielsaustin.com",
         dataSource: "ServiceAgent · Homespothq 2,772 Google reviews",
+        dataSourceUrl: "https://www.serviceagent.com",
       },
       {
         id: 7,
@@ -80,6 +86,7 @@ const DATASETS = {
         pageSpeed: 63, auditScore: 66, mobileScore: 59,
         websiteUrl: "https://www.foxservice.com",
         dataSource: "Birdeye 6,094 cross-platform · est. 1972",
+        dataSourceUrl: "https://birdeye.com",
       },
       {
         id: 8,
@@ -90,6 +97,7 @@ const DATASETS = {
         pageSpeed: 58, auditScore: 61, mobileScore: 55,
         websiteUrl: "https://www.stansac.com",
         dataSource: "Birdeye 6,791 Google · 573 Yelp · est. 1954",
+        dataSourceUrl: "https://birdeye.com",
       },
 
       {
@@ -101,6 +109,7 @@ const DATASETS = {
         pageSpeed: 66, auditScore: 70, mobileScore: 64,
         websiteUrl: "https://www.abacusplumbing.com",
         dataSource: "Best Pick Reports 4.6★ · 578 Google reviews · est. 2003",
+        dataSourceUrl: "https://bestpickreports.com",
       },
       {
         id: 10,
@@ -111,6 +120,7 @@ const DATASETS = {
         pageSpeed: 61, auditScore: 64, mobileScore: 58,
         websiteUrl: "https://www.sanddplumbing.com",
         dataSource: "Birdeye 816 Google · family-owned est. 1980",
+        dataSourceUrl: "https://birdeye.com",
       },
       {
         id: 11,
@@ -121,6 +131,7 @@ const DATASETS = {
         pageSpeed: 55, auditScore: 52, mobileScore: 50,
         websiteUrl: "https://www.mooremoreplumbing.com",
         dataSource: "Birdeye 338 cross-platform · est. 1986",
+        dataSourceUrl: "https://birdeye.com",
       },
       {
         id: 12,
@@ -131,6 +142,7 @@ const DATASETS = {
         pageSpeed: 48, auditScore: 44, mobileScore: 45,
         websiteUrl: "https://ezflowplumbingtexas.com",
         dataSource: "4.9★ Google · 276 Yelp reviews · est. 2009",
+        dataSourceUrl: "https://www.yelp.com",
       },
 
       {
@@ -142,6 +154,7 @@ const DATASETS = {
         pageSpeed: 70, auditScore: 72, mobileScore: 68,
         websiteUrl: "https://www.excaliburplumbing.com",
         dataSource: "Birdeye 501 Google · Angi 92% approval",
+        dataSourceUrl: "https://birdeye.com",
       },
       {
         id: 14,
@@ -152,6 +165,7 @@ const DATASETS = {
         pageSpeed: 52, auditScore: 48, mobileScore: 50,
         websiteUrl: "https://www.plumbersthatcare.com",
         dataSource: "ServiceAgent 586 Google · Birdeye 642 reviews · est. 2012",
+        dataSourceUrl: "https://www.serviceagent.com",
       },
       {
         id: 15,
@@ -162,6 +176,7 @@ const DATASETS = {
         pageSpeed: 60, auditScore: 62, mobileScore: 58,
         websiteUrl: "https://www.rotorooter.com/austin/",
         dataSource: "ThreeBestRated top-3 · TrustAnalytica 4.6★ · 302 Yelp",
+        dataSourceUrl: "https://threebestrated.com",
       },
       {
         id: 16,
@@ -172,6 +187,7 @@ const DATASETS = {
         pageSpeed: 72, auditScore: 68, mobileScore: 70,
         websiteUrl: "https://redbudplumbing.com",
         dataSource: "Angi 5.0★ · BuildZoom top 11% TX contractors",
+        dataSourceUrl: "https://www.angi.com",
       },
 
       {
@@ -183,6 +199,7 @@ const DATASETS = {
         pageSpeed: 45, auditScore: 41, mobileScore: 43,
         websiteUrl: "https://www.clarkekentplumbing.com",
         dataSource: "TrustAnalytica 4.4★ · 210 Yelp reviews · est. 1986",
+        dataSourceUrl: "https://trustanalytica.com",
       },
       {
         id: 18,
@@ -193,6 +210,7 @@ const DATASETS = {
         pageSpeed: 38, auditScore: 35, mobileScore: 36,
         websiteUrl: "https://www.wilsonplumbingaustin.com",
         dataSource: "Angi 4.9★ · Super Service Awards 2011–2017 · est. 1947",
+        dataSourceUrl: "https://www.angi.com",
       },
       {
         id: 19,
@@ -203,6 +221,7 @@ const DATASETS = {
         pageSpeed: 55, auditScore: 58, mobileScore: 52,
         websiteUrl: "https://www.accurateplumbingaustin.com",
         dataSource: "Sample data — BestProsInTown featured · est. 2010",
+        dataSourceUrl: "https://bestprosintown.com",
       },
       {
         id: 20,
@@ -213,6 +232,7 @@ const DATASETS = {
         pageSpeed: 60, auditScore: 55, mobileScore: 57,
         websiteUrl: "https://www.altruisticplumbing.com",
         dataSource: "Sample data — Thumbtack top pro · est. 2017",
+        dataSourceUrl: "https://www.thumbtack.com",
       },
     ],
   },
@@ -315,6 +335,7 @@ const DATASETS = {
         pageSpeed: 72, auditScore: 75, mobileScore: 68,
         websiteUrl: "https://radiantplumbing.com",
         dataSource: "Sample data — Birdeye 18,754 cross-platform reviews",
+        dataSourceUrl: "https://birdeye.com",
       },
       {
         id: 10,
@@ -325,6 +346,7 @@ const DATASETS = {
         pageSpeed: 62, auditScore: 58, mobileScore: 60,
         websiteUrl: "https://www.blueribbonair.com",
         dataSource: "Sample data — Angi 5.0★ · Orbital top-9 by reviews",
+        dataSourceUrl: "https://www.angi.com",
       },
       {
         id: 11,
@@ -335,6 +357,7 @@ const DATASETS = {
         pageSpeed: 70, auditScore: 68, mobileScore: 66,
         websiteUrl: "https://www.ars.com/austin",
         dataSource: "Sample data — BBB accredited · Expertise.com featured",
+        dataSourceUrl: "https://www.bbb.org",
       },
       {
         id: 12,
@@ -345,6 +368,7 @@ const DATASETS = {
         pageSpeed: 52, auditScore: 48, mobileScore: 50,
         websiteUrl: "https://www.thecoolestaustin.com",
         dataSource: "Sample data — BBB A+ · Expertise.com featured",
+        dataSourceUrl: "https://www.bbb.org",
       },
 
       {
@@ -397,6 +421,7 @@ const DATASETS = {
         pageSpeed: 45, auditScore: 42, mobileScore: 44,
         websiteUrl: "https://www.superioratticandair.com",
         dataSource: "Sample data — Angi highly rated · spray foam specialist",
+        dataSourceUrl: "https://www.angi.com",
       },
       {
         id: 18,
@@ -427,6 +452,7 @@ const DATASETS = {
         pageSpeed: 65, auditScore: 62, mobileScore: 60,
         websiteUrl: "https://www.saltserviceco.com",
         dataSource: "Sample data — Orbital top-9 by reviews · est. 2019",
+        dataSourceUrl: "https://birdeye.com",
       },
     ],
   },
@@ -518,6 +544,7 @@ const DATASETS = {
         pageSpeed: 60, auditScore: 62, mobileScore: 58,
         websiteUrl: "https://www.malcoelectric.com",
         dataSource: "Sample data — licensed since 1983 · Angi featured",
+        dataSourceUrl: "https://www.angi.com",
       },
 
       {
@@ -529,6 +556,7 @@ const DATASETS = {
         pageSpeed: 45, auditScore: 42, mobileScore: 43,
         websiteUrl: "https://www.acelectricaustin.com",
         dataSource: "Sample data — family-owned since 1984 · Expertise.com",
+        dataSourceUrl: "https://www.expertise.com",
       },
       {
         id: 10,
@@ -539,6 +567,7 @@ const DATASETS = {
         pageSpeed: 55, auditScore: 50, mobileScore: 52,
         websiteUrl: "https://www.atxelectricalservices.com",
         dataSource: "Sample data — Birdeye 5.0★ 96 reviews",
+        dataSourceUrl: "https://birdeye.com",
       },
       {
         id: 11,
@@ -549,6 +578,7 @@ const DATASETS = {
         pageSpeed: 50, auditScore: 47, mobileScore: 48,
         websiteUrl: "https://www.supersunelectrical.com",
         dataSource: "Sample data — Angi top-rated · SPAN panel specialist",
+        dataSourceUrl: "https://www.angi.com",
       },
       {
         id: 12,
@@ -559,6 +589,7 @@ const DATASETS = {
         pageSpeed: 62, auditScore: 58, mobileScore: 60,
         websiteUrl: "https://www.empwrelectric.com",
         dataSource: "Sample data — HomeAdvisor featured · est. 2020",
+        dataSourceUrl: "https://www.homeadvisor.com",
       },
 
       {
@@ -631,6 +662,7 @@ const DATASETS = {
         pageSpeed: 63, auditScore: 66, mobileScore: 59,
         websiteUrl: "https://www.foxservice.com",
         dataSource: "Sample data — Birdeye 6,094 cross-platform · est. 1972",
+        dataSourceUrl: "https://birdeye.com",
       },
       {
         id: 20,
@@ -641,6 +673,7 @@ const DATASETS = {
         pageSpeed: 74, auditScore: 76, mobileScore: 72,
         websiteUrl: "https://www.danielsaustin.com",
         dataSource: "Sample data — ServiceAgent 2,772 Google reviews",
+        dataSourceUrl: "https://www.serviceagent.com",
       },
     ],
   },
@@ -661,6 +694,7 @@ const DATASETS = {
         pageSpeed: 70, auditScore: 72, mobileScore: 68,
         websiteUrl: "https://www.myrescueplumbing.com",
         dataSource: "4.9★ Google · 1,534 reviews · multiple Chicago GBP listings · est. 2018",
+        dataSourceUrl: "https://www.google.com/maps",
       },
       {
         id: 2,
@@ -692,6 +726,7 @@ const DATASETS = {
         pageSpeed: 55, auditScore: 52, mobileScore: 50,
         websiteUrl: "https://www.apexplumbingchicago.com",
         dataSource: "Sample data — Expertise.com featured · est. 1984",
+        dataSourceUrl: "https://www.expertise.com",
       },
       {
         id: 5,
@@ -722,6 +757,7 @@ const DATASETS = {
         pageSpeed: 48, auditScore: 45, mobileScore: 46,
         websiteUrl: "https://www.bmwplumbing.com",
         dataSource: "Sample data — family-owned · Angi Super Service",
+        dataSourceUrl: "https://www.angi.com",
       },
 
       {
@@ -743,6 +779,7 @@ const DATASETS = {
         pageSpeed: 44, auditScore: 42, mobileScore: 40,
         websiteUrl: "https://www.allrooterplumbing.com",
         dataSource: "Sample data — BestProsInTown featured",
+        dataSourceUrl: "https://bestprosintown.com",
       },
       {
         id: 10,
@@ -774,6 +811,7 @@ const DATASETS = {
         pageSpeed: 66, auditScore: 64, mobileScore: 62,
         websiteUrl: "https://www.althoffindustries.com",
         dataSource: "Sample data — BestPickReports · est. 1928",
+        dataSourceUrl: "https://bestpickreports.com",
       },
       {
         id: 13,
@@ -804,6 +842,7 @@ const DATASETS = {
         pageSpeed: 38, auditScore: 35, mobileScore: 36,
         websiteUrl: "https://www.lacassaplumbing.com",
         dataSource: "Sample data — Thumbtack top pro",
+        dataSourceUrl: "https://www.thumbtack.com",
       },
 
       {
@@ -815,6 +854,7 @@ const DATASETS = {
         pageSpeed: 70, auditScore: 68, mobileScore: 66,
         websiteUrl: "https://www.mrrooter.com/chicago/",
         dataSource: "Sample data — national franchise · Neighborly brand",
+        dataSourceUrl: "https://www.neighborly.com",
       },
       {
         id: 17,

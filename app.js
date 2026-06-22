@@ -126,7 +126,7 @@ function render() {
           <a href="${esc(b.websiteUrl || '#')}" target="_blank" rel="noopener" class="biz-link">${esc(b.name)}</a>
         </div>
         <div class="biz-address">${esc(b.address)}</div>
-        ${b.dataSource ? `<div class="biz-source"><a href="${esc(b.websiteUrl || '#')}" target="_blank" rel="noopener">${esc(b.dataSource)}</a></div>` : ''}
+        ${b.dataSource ? `<div class="biz-source"><a href="${esc(b.dataSourceUrl || b.websiteUrl || '#')}" target="_blank" rel="noopener">${esc(b.dataSource)}</a></div>` : ''}
       </td>
       <td class="col-score">
         <span class="score-pill score-pill-lg ${scoreClass(b.score)}">${b.score.toFixed(1)}</span>
