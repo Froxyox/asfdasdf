@@ -28,19 +28,26 @@ const sampleBadge  = document.getElementById('sampleBadge');
 
 const SLIDERS = [wRepEl, wSearchEl, wSiteEl];
 
-/* ── Linked sliders — always equal split ────────────────────── */
-// Whatever value the moved slider is set to, the remaining (100 - val)
-// is divided equally between the other two.
-// e.g. Search → 80: remaining = 20 → Reputation = 10, Site = 10.
+/* ── Linked sliders — affects only the next one below ───────── */
+// Moving a slider only adjusts the slider directly below it (wrapping around).
+// The third slider stays unchanged.
+// e.g. Reputation → 70: Site stays the same, Search = 100 - 70 - Site (clamped 0-100).
 function onSliderMove(movedEl) {
-  const val       = +movedEl.value;
-  const others    = SLIDERS.filter(s => s !== movedEl);
-  const remaining = 100 - val;
+  const idx       = SLIDERS.indexOf(movedEl);
+  const nextIdx   = (idx + 1) % SLIDERS.length;
+  const otherIdx  = (idx + 2) % SLIDERS.length;
 
-  // Split remaining equally; give any odd remainder to the first other
-  const half = Math.floor(remaining / 2);
-  others[0].value = half + (remaining % 2);
-  others[1].value = half;
+  const movedVal  = +movedEl.value;
+  const otherVal  = +SLIDERS[otherIdx].value;
+
+  // Clamp so total never exceeds 100
+  const nextVal   = Math.max(0, Math.min(100, 100 - movedVal - otherVal));
+  SLIDERS[nextIdx].value = nextVal;
+
+  // If the moved + unchanged already exceed 100, cap the moved slider
+  if (movedVal + otherVal > 100) {
+    movedEl.value = 100 - otherVal;
+  }
 
   updateSliderLabels();
   render();
@@ -119,7 +126,7 @@ function render() {
           <a href="${esc(b.websiteUrl || '#')}" target="_blank" rel="noopener" class="biz-link">${esc(b.name)}</a>
         </div>
         <div class="biz-address">${esc(b.address)}</div>
-        ${b.dataSource ? `<div class="biz-source">${esc(b.dataSource)}</div>` : ''}
+        ${b.dataSource ? `<div class="biz-source"><a href="${esc(b.websiteUrl || '#')}" target="_blank" rel="noopener">${esc(b.dataSource)}</a></div>` : ''}
       </td>
       <td class="col-score">
         <span class="score-pill score-pill-lg ${scoreClass(b.score)}">${b.score.toFixed(1)}</span>
