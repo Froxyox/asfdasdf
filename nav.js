@@ -53,12 +53,7 @@
         <a href="methodology.html">Methodology</a>
         <a href="submit.html">Get Listed</a>
       </div>
-      <div class="footer-col">
-        <h4>Data sources</h4>
-        <a href="#">Google Places</a>
-        <a href="#">PageSpeed Insights</a>
-        <a href="#">Ubersuggest</a>
-      </div>
+
       <div class="footer-col">
         <h4>Contact</h4>
         <a href="mailto:skylar@migonmarketing.com">skylar@migonmarketing.com</a>
